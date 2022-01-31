@@ -2,6 +2,9 @@ const express = require('express');
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
 const path = require('path');
+const seedPosts = require('./seeds/post-seeds');
+const seedUsers = require('./seeds/user-seeds');
+const seedComments = require('./seeds/comment-seeds');
 
 const helpers = require('./utils/helpers');
 
@@ -41,6 +44,15 @@ app.set('view engine', 'handlebars');
 app.use(routes);
 
 // turn on connection to db and server
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(async() => {
+  await seedUsers();
+    console.log('\n----- USERS SEEDED -----\n');
+  
+  await seedPosts();
+    console.log('\n----- POSTS SEEDED -----\n');
+
+  await seedComments();
+    console.log('\n----- COMMENTS SEEDED -----\n');
+
   app.listen(PORT, () => console.log('Now listening'));
 });
