@@ -73,11 +73,13 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 1%;
+    background: rgb(83, 83, 83);
   }
   
   main {
     flex: 1;
     padding: 2% 4%;
+    background: rgb(112, 148, 112);
   }
   
   .btn-no-style {
